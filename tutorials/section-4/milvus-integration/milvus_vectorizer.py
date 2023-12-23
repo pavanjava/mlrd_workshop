@@ -8,9 +8,11 @@ _ = load_dotenv(find_dotenv())
 
 class MilvusVectorizer:
     def __init__(self):
+        collection_name: str = 't55_product_specs'
+        db_uri: str = 'http://localhost:19530'
         # load documents
-        documents = SimpleDirectoryReader(input_dir='/Users/pavanmantha/Pavans/PracticeExamples/DataScience_Practice/LLMs/llama_index_tutorials/vector-stores/data', required_exts=['.pdf']).load_data()
-        vector_store = MilvusVectorStore(dim=1536, overwrite=False, collection_name='t55_product_specs', uri='http://localhost:19530') # overwrite=True will override existing vectors in the store.
+        documents = SimpleDirectoryReader(input_dir='/Users/pavanmantha/Pavans/Workshops/Mallareddy-university/mlrd_workshop/tutorials/section-4/data', required_exts=['.pdf']).load_data()
+        vector_store = MilvusVectorStore(dim=1536, overwrite=False, collection_name=collection_name, uri=db_uri) # overwrite=True will override existing vectors in the store.
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
         service_context = ServiceContext.from_defaults(chunk_size=1536, chunk_overlap=200)
         # save the documents index to vector store
@@ -24,7 +26,7 @@ class MilvusVectorizer:
 
 if __name__ == "__main__":
     obj = MilvusVectorizer()
-    obj.query("The T55 fleet has accumulated how many hours of operation?")
+    obj.query("What is the length, Height of the all engines ?")
 
 
 

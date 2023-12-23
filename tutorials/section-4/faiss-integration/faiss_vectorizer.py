@@ -13,7 +13,7 @@ class FaissVectorizer:
         dim = 1536
         faiss_index = faiss.IndexFlatL2(dim)
         # load documents
-        documents = SimpleDirectoryReader(input_dir='/Users/pavanmantha/Pavans/PracticeExamples/DataScience_Practice/LLMs/llama_index_tutorials/vector-stores/data',required_exts=['.pdf']).load_data()
+        documents = SimpleDirectoryReader(input_dir='/Users/pavanmantha/Pavans/Workshops/Mallareddy-university/mlrd_workshop/tutorials/section-4/data',required_exts=['.pdf']).load_data()
         # create storage_context and faiss_index
         self.vector_store = FaissVectorStore(faiss_index=faiss_index)
         self.storage_context = StorageContext.from_defaults(vector_store=self.vector_store)
@@ -31,7 +31,7 @@ class FaissVectorizer:
     def query(self):
         # set Logging to DEBUG for more detailed outputs
         query_engine = self.index.as_query_engine()
-        response = query_engine.query("The T55 fleet has accumulated how many hours of operation?")
+        response = query_engine.query("What is the segment profit of aerospace ?")
         pprint(response.response)
 
 
